@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Codex Enterprise Guide">
+  <rect width="64" height="64" rx="14" fill="#10141d"/>
+  <path d="M18 21h21v6H18zM18 31h15v6H18zM18 41h21v6H18z" fill="#22d3c5"/>
+  <path d="M41 23l8 9-8 9" fill="none" stroke="#f0c36a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

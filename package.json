@@ -4,9 +4,10 @@
   "private": false,
   "description": "一份面向个人、创作者、开发者与团队的 Codex 企业级实践指南。",
   "scripts": {
-    "start": "python3 -m http.server 4173",
-    "check": "node --check script.js",
-    "build": "mkdir -p dist && cp index.html styles.css script.js README.md dist/"
+    "dev": "vitepress dev docs --host 0.0.0.0 --port 4173",
+    "start": "npm run dev",
+    "check": "vitepress build docs",
+    "build": "vitepress build docs"
   },
   "keywords": [
     "codex",
@@ -15,5 +16,8 @@
     "ci-cd",
     "developer-workflow"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "vitepress": "^1.6.4"
+  }
 }

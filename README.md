@@ -4,17 +4,18 @@
 
 ## 当前版本
 
-这个目录现在包含一个静态首页：
+这个项目现在已经升级为 VitePress 文档站：
 
-- `index.html`：项目首页和内容骨架
-- `styles.css`：视觉样式、响应式布局和动效
-- `script.js`：滚动时的导航栏状态
+- `docs/`：文档内容源
+- `docs/.vitepress/config.mts`：站点配置、导航和侧边栏
+- `docs/.vitepress/theme/custom.css`：主题样式
 - `.github/workflows/deploy.yml`：GitHub Pages 自动部署流水线
 
 本地启动：
 
 ```bash
-npm start
+npm install
+npm run dev
 ```
 
 然后访问：
@@ -23,7 +24,11 @@ npm start
 http://localhost:4173
 ```
 
-也可以直接用浏览器打开 `index.html` 预览。
+构建：
+
+```bash
+npm run build
+```
 
 ## 内容方向
 
@@ -63,10 +68,10 @@ CI 负责在代码合并前自动检查项目质量，CD 负责把通过检查�
 
 后续如果迁移到 VuePress 或 VitePress，可以加入 `pnpm lint`、`pnpm build`、链接检查和 Playwright 冒烟测试。
 
-当前仓库已经内置一个最小 GitHub Pages workflow：
+当前仓库已经内置 GitHub Pages workflow：
 
 ```text
-push main -> npm run check -> npm run build -> upload artifact -> deploy pages
+push main -> npm ci -> npm run check -> npm run build -> upload artifact -> deploy pages
 ```
 
 ## 下一步
