@@ -20,6 +20,7 @@ export default defineConfig({
         text: "开始",
         items: [
           { text: "项目总览", link: "/guide/overview" },
+          { text: "产品形态", link: "/guide/product-forms" },
           { text: "学习路线", link: "/roadmap" },
         ],
       },
