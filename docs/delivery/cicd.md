@@ -6,7 +6,7 @@ CI 是持续集成，负责验证代码质量。CD 是持续交付或持续部�
 
 ## 当前项目流水线
 
-当前仓库使用 GitHub Actions 部署 GitHub Pages。
+当前仓库是一个文档站，所以先用一条最小 workflow 跑通 GitHub Pages 部署。
 
 流程是：
 
@@ -25,6 +25,10 @@ push main
 .github/workflows/deploy.yml
 ```
 
+这条 workflow 同时承担了检查、构建和发布，适合当前这种单应用、低复杂度项目。
+
+但在复杂项目里，CI/CD 通常不是一条大流水线，而是一组 workflow。每条 workflow 负责一个清晰边界：一个应用、一个服务、一个环境，或者一个交付阶段。
+
 ## 为什么需要 CI/CD
 
 没有 CI/CD 时，项目发布依赖人的记忆：
@@ -35,6 +39,68 @@ push main
 - 失败后怎么回滚？
 
 有 CI/CD 后，每次合并都走同一条流水线，结果可追踪，失败可定位，发布可复现。
+
+## Workflow 的拆分方式
+
+在 GitHub Actions 里，workflow 是 CI/CD 的落地文件，放在：
+
+```text
+.github/workflows/
+```
+
+一个复杂项目通常会有多条 workflow。例如：
+
+```text
+.github/workflows/
+  ci-frontend-web.yml
+  ci-frontend-admin.yml
+  ci-frontend-dashboard.yml
+  ci-backend-api.yml
+  ci-backend-worker.yml
+  deploy-dev.yml
+  deploy-staging.yml
+  deploy-prod.yml
+  security-scan.yml
+```
+
+它背后的层级是：
+
+```text
+CI/CD 体系
+  -> 多个 workflow
+      -> 每个 workflow 负责一个应用、服务、环境或阶段
+          -> 每个 workflow 里有多个 job
+              -> 每个 job 里有多个 step
+```
+
+比如同一个前端项目，也可以继续按业务入口拆：
+
+| Workflow | 负责范围 | 常见检查 |
+| --- | --- | --- |
+| `ci-frontend-web.yml` | 前台官网或用户端 | lint、typecheck、test、build |
+| `ci-frontend-admin.yml` | 管理后台 | lint、typecheck、权限相关测试、build |
+| `ci-frontend-dashboard.yml` | 数据大屏 | 图表组件测试、构建、截图冒烟 |
+| `ci-backend-api.yml` | 后端 API | 单元测试、集成测试、接口契约检查 |
+| `ci-backend-worker.yml` | 异步任务或定时任务 | 单元测试、任务执行冒烟、镜像构建 |
+
+拆分的核心目的不是文件变多，而是让交付边界变清楚：
+
+- 改了前台，只跑前台相关检查。
+- 改了管理端，不阻塞后端无关服务。
+- 后端 API 失败时，定位到 API workflow，而不是在一条巨大的流水线里翻日志。
+- 生产发布可以单独审批，不被普通 PR 检查绑死。
+
+如果项目是 monorepo，还可以配合 `paths` 触发条件，让不同目录变化只启动对应 workflow：
+
+```yaml
+on:
+  pull_request:
+    paths:
+      - "apps/admin/**"
+      - "packages/ui/**"
+```
+
+这表示只有管理端或共享 UI 包变化时，才触发这条 workflow。
 
 ## 推荐的企业级分层
 

@@ -21,6 +21,8 @@ export default defineConfig({
         items: [
           { text: "项目总览", link: "/guide/overview" },
           { text: "产品形态", link: "/guide/product-forms" },
+          { text: "技术栈", link: "/guide/tech-stack" },
+          { text: "对 AI 友好的代码", link: "/guide/ai-friendly-code" },
           { text: "学习路线", link: "/roadmap" },
         ],
       },

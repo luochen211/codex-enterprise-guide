@@ -59,12 +59,29 @@ npm run build
 
 CI 负责在代码合并前自动检查项目质量，CD 负责把通过检查的版本发布出去。
 
-推荐流水线：
+当前仓库是单个文档站，所以用一条 GitHub Pages workflow 跑通最小闭环。复杂项目会把 CI/CD 拆成多条 workflow，例如前台、管理端、数据大屏、后端 API、后台任务、预发部署、生产部署等。
+
+推荐流水线层级：
 
 1. Pull Request：自动检查 HTML/CSS/JS 基础问题，确认页面能构建。
 2. Preview：为每个 PR 生成预览地址，方便 review 页面效果。
 3. Main Branch：合并到主分支后自动发布到生产环境。
 4. Rollback：保留历史构建产物，生产发布异常时可以快速回滚。
+
+复杂项目的 workflow 可以这样拆：
+
+```text
+.github/workflows/
+  ci-frontend-web.yml
+  ci-frontend-admin.yml
+  ci-frontend-dashboard.yml
+  ci-backend-api.yml
+  ci-backend-worker.yml
+  deploy-staging.yml
+  deploy-prod.yml
+```
+
+真正的价值是：谁变了就只跑谁，谁失败了就只看谁，谁发布就只审批谁。
 
 后续如果迁移到 VuePress 或 VitePress，可以加入 `pnpm lint`、`pnpm build`、链接检查和 Playwright 冒烟测试。
 
