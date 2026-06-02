@@ -9,7 +9,7 @@ export default defineConfig({
   themeConfig: {
     logo: "/logo.svg",
     nav: [
-      { text: "路线", link: "/roadmap" },
+      { text: "学习路径", link: "/roadmap" },
       { text: "指南", link: "/guide/overview" },
       { text: "部署", link: "/delivery/server" },
       { text: "案例", link: "/cases/" },
@@ -23,7 +23,7 @@ export default defineConfig({
           { text: "产品形态", link: "/guide/product-forms" },
           { text: "技术栈", link: "/guide/tech-stack" },
           { text: "对 AI 友好的代码", link: "/guide/ai-friendly-code" },
-          { text: "学习路线", link: "/roadmap" },
+          { text: "学习路径", link: "/roadmap" },
         ],
       },
       {

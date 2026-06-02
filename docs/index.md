@@ -10,7 +10,7 @@ hero:
     alt: Codex Enterprise Guide
   actions:
     - theme: brand
-      text: 从路线开始
+      text: 从学习路径开始
       link: /roadmap
     - theme: alt
       text: 查看部署方案
@@ -23,7 +23,7 @@ features:
     details: 理解前端、后端、数据库、存储、部署和 CI/CD 各自解决什么问题。
   - title: AI 友好代码
     details: 用高内聚、低耦合、单一职责组织代码，让 Codex 更容易读懂、修改和验证。
-  - title: 学习路线
+  - title: 学习路径
     details: 从第一次上手、工程实践、工作流扩展，到团队沉淀，按阶段建立能力。
   - title: 服务器部署
     details: 解释静态托管、云服务器、Nginx、HTTPS、日志、备份和回滚边界。
@@ -40,6 +40,8 @@ features:
 它会围绕真实任务组织内容：怎么让 Codex 读懂项目，怎么提出可执行任务，怎么验证结果，怎么把成功经验沉淀成团队规范，怎么把文档站部署到公网，并让 CI/CD 接管每次发布。
 
 在进入具体工具之前，它也会先补一层基础认知：一个项目可能是官网、小程序、Web 应用、管理后台、API 服务或自动化工具。先判断产品形态，再说明技术栈和代码组织方式，才能把交付边界和验收标准说清楚。
+
+![Codex 学习路径：从会用到可交付](/learning-path.png)
 
 ## 当前落地形态
 
