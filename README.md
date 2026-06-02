@@ -46,8 +46,12 @@ npm run build
 这个项目后续可以按三个阶段演进：
 
 1. 静态托管：适合早期文档站，可部署到 GitHub Pages、Cloudflare Pages、Vercel 或 Netlify。
-2. 云服务器：适合需要自己控制运行环境时使用，可用 Nginx 提供静态文件服务，并配置域名和 HTTPS。
-3. 容器部署：适合团队化和多环境管理，用 Docker 固定运行环境，再接入日志、备份和回滚策略。
+2. 应用托管：适合快速部署后端 API、Bot 或小型全栈项目，例如 Railway、Render、Fly.io。Railway 更像 PaaS/应用托管平台，不是传统意义上需要自己登录维护的云服务器。
+3. 云服务器：适合需要自己控制运行环境时使用，国内常见是阿里云 ECS，也可以用腾讯云、华为云等；国外类似 AWS EC2、DigitalOcean Droplet。部署时通常要自己配置 Linux、Nginx、域名、HTTPS、日志和备份。
+4. 域名注册和 DNS：域名可以在阿里云、腾讯云、Cloudflare Registrar、Namecheap、GoDaddy 等平台购买。Cloudflare 很常见，因为它既能买域名，也能托管 DNS、CDN 和缓存。
+5. 容器部署：适合团队化和多环境管理，用 Docker 固定运行环境，再接入日志、备份和回滚策略。
+
+可以简单理解：阿里云 ECS 是“买一台云上的 Linux 机器”；Railway 是“把应用交给平台帮你跑”；Vercel 是“把前端或文档站交给平台帮你构建和发布”。
 
 最小上线链路：
 
