@@ -71,6 +71,10 @@ GitHub Secrets 是 GitHub Actions 使用的加密敏感配置，用来保存不�
 4. 在 `Name` 中填写变量名，例如 `DEPLOY_TOKEN`。
 5. 在 `Secret` 中粘贴真实值，点击 `Add secret`。
 
+页面大致如下。示例中的 Secret 名称仅用于演示，真实项目应根据实际服务命名：
+
+![GitHub Actions Secrets 设置页面](/github-actions-secrets-settings.png)
+
 Secret 创建后，GitHub 只显示它的名称，不提供再次查看原值的入口。需要更换时，直接更新或删除后重新添加；不要把旧值复制到 issue 或 PR 中。
 
 ### 通过 GitHub CLI 添加
