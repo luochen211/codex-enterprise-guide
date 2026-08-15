@@ -29,6 +29,120 @@ push main
 
 但在复杂项目里，CI/CD 通常不是一条大流水线，而是一组 workflow。每条 workflow 负责一个清晰边界：一个应用、一个服务、一个环境，或者一个交付阶段。
 
+## GitHub Secrets 是什么
+
+GitHub Secrets 是 GitHub Actions 使用的加密敏感配置，用来保存不应该进入代码仓库的值，例如：
+
+- 云服务 Access Key、部署 Token、第三方 API Key。
+- 数据库密码、Webhook Token、私有 npm 注册表 Token。
+- 测试环境或生产环境的登录凭证。
+
+它解决的是“workflow 需要凭证，但凭证不能写进 Git”的问题。
+
+不要把真实密钥写进以下位置：
+
+- 源代码、`README.md`、`.env` 并提交到仓库。
+- workflow 的 `run:` 命令、日志或错误信息。
+- issue、PR 评论、截图或聊天记录。
+
+即使仓库现在是私有的，也不应该把密钥当作普通配置提交。代码可能被复制、误公开、下载到本地，或者被未来的日志和构建产物带出去。密钥一旦泄露，应立即在提供方吊销并重新生成，不能只靠删除 Git 文件修复。
+
+### 为什么当前项目没有添加 Secret
+
+当前项目是 GitHub Pages 文档站，workflow 使用的是：
+
+- `permissions.contents: read` 读取代码。
+- `permissions.pages: write` 上传 Pages 发布产物。
+- `permissions.id-token: write` 配合 GitHub Pages 官方部署流程进行身份验证。
+
+当前的构建不需要第三方 API、数据库或云服务器凭证，所以没有必要为了“完整”而新增一个假 Secret。没有敏感凭证需要使用时，不添加 Secret 反而更安全、更容易维护。
+
+如果以后增加服务器部署、域名服务、内容通知或外部 API，再根据具体服务添加最小范围的 Secret。
+
+## 如何添加 GitHub Secret
+
+### 通过 GitHub 网页添加仓库 Secret
+
+你需要对仓库拥有写权限。进入仓库后：
+
+1. 打开 `Settings`。
+2. 进入 `Secrets and variables` → `Actions`。
+3. 选择 `Secrets`，点击 `New repository secret`。
+4. 在 `Name` 中填写变量名，例如 `DEPLOY_TOKEN`。
+5. 在 `Secret` 中粘贴真实值，点击 `Add secret`。
+
+Secret 创建后，GitHub 只显示它的名称，不提供再次查看原值的入口。需要更换时，直接更新或删除后重新添加；不要把旧值复制到 issue 或 PR 中。
+
+### 通过 GitHub CLI 添加
+
+先确认当前登录的是正确账号和仓库，再让 CLI 交互式读取值：
+
+```bash
+gh secret set DEPLOY_TOKEN --repo OWNER/REPO
+```
+
+也可以从本地文件读取：
+
+```bash
+gh secret set DEPLOY_TOKEN --repo OWNER/REPO < ./deploy-token.txt
+```
+
+不要把真实值直接写在命令行参数中，以免进入 shell 历史记录。临时文件使用后应立即删除，并确认没有被 Git 跟踪。
+
+如果凭证只应该用于生产发布，可以使用 Environment Secret：
+
+```bash
+gh secret set --env production DEPLOY_TOKEN --repo OWNER/REPO
+```
+
+这样可以把 Secret 限定到 `production` 环境，并进一步配置 required reviewers，避免普通检查任务直接拿到生产凭证。
+
+## 如何在 workflow 中使用
+
+Secret 创建后，不会自动进入每个 step。需要在 workflow 中显式通过 `secrets` context 传给 action 或脚本：
+
+```yaml
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy
+        env:
+          DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+        run: ./scripts/deploy.sh
+```
+
+优先通过 `env` 传入程序，不要把 Secret 拼进命令字符串。日志中也不要输出它：
+
+```yaml
+# 错误示例：可能把凭证带入日志
+- run: echo "token=${{ secrets.DEPLOY_TOKEN }}"
+```
+
+### Repository、Environment 和 Organization Secret
+
+| 类型 | 适合场景 | 权限范围 |
+| --- | --- | --- |
+| Repository Secret | 单个仓库使用的测试或部署凭证 | 当前仓库 |
+| Environment Secret | staging、production 等环境隔离 | 指定环境，可配审批 |
+| Organization Secret | 多个仓库共享的统一凭证 | 组织，可限制可用仓库 |
+
+选择原则是“最小范围”：只给实际需要的 workflow、环境和仓库授权。用于生产发布的凭证通常应放在 Environment，而不是直接放成整个仓库都能使用的 Secret。
+
+### Fork PR 的安全边界
+
+来自 fork 的 PR 默认拿不到上游仓库的 Secrets。这是必要的安全边界，因为 PR 中的 workflow 代码可能被修改为读取或外传凭证。
+
+因此：
+
+- 普通 `pull_request` 检查应尽量不依赖 Secret。
+- 不要为了让 fork PR 通过，随意把 Secret 暴露给外部贡献者。
+- 需要发布或访问生产资源的 job，应放在受保护环境，并要求维护者审批。
+
+详细规则可参考 [GitHub Secrets 官方文档](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions)。
+
 ## 为什么需要 CI/CD
 
 没有 CI/CD 时，项目发布依赖人的记忆：
