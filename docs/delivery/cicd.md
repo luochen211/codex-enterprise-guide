@@ -125,6 +125,52 @@ jobs:
 - run: echo "token=${{ secrets.DEPLOY_TOKEN }}"
 ```
 
+## Secret 不会自动让生产环境生效
+
+添加 Secret 只是完成了“把变量安全地存放在 GitHub”这一步。它不会自动登录服务器，也不会自动写入服务器的 `.env`，更不会自动重启后端进程。
+
+生产部署至少要走完这条链路：
+
+```text
+GitHub Secret
+  -> Actions workflow 显式读取
+  -> 部署脚本通过环境变量接收
+  -> 脚本安全写入服务器环境文件
+  -> 重启或重载后端服务
+  -> 健康检查和业务验收
+```
+
+例如，workflow 可以把 Secret 传给部署脚本：
+
+```yaml
+- name: Deploy backend
+  env:
+    DEPLOY_SSH_HOST: ${{ secrets.DEPLOY_SSH_HOST }}
+    DEPLOY_SSH_USER: ${{ secrets.DEPLOY_SSH_USER }}
+    API_KEY: ${{ secrets.API_KEY }}
+  run: ./scripts/deploy-backend.sh
+```
+
+部署脚本则需要在服务器上完成类似工作：
+
+```bash
+# 伪代码：具体路径和服务名按项目实际情况修改
+printf '%s\n' "API_KEY=$API_KEY" | \\
+  ssh "$DEPLOY_SSH_USER@$DEPLOY_SSH_HOST" 'umask 077 && cat > /srv/app/.env'
+ssh "$DEPLOY_SSH_USER@$DEPLOY_SSH_HOST" 'sudo systemctl restart app-backend'
+curl --fail https://api.example.com/health
+```
+
+真实脚本还需要解决 Secret 内容如何通过标准输入或受控文件传输、环境文件权限、服务用户权限、失败回滚和日志脱敏等问题。不要把 Secret 直接拼接进 SSH 命令，也不要在部署日志中打印环境文件内容。
+
+因此，验证“Secret 配置完成”至少要分成三层：
+
+1. **GitHub 层**：Actions 能读取到对应 Secret，且 job/Environment 权限正确。
+2. **服务器层**：部署脚本确实把新值写入目标环境文件，文件权限和属主正确。
+3. **应用层**：服务已重启或重载，健康检查和一条真实业务路径确认新配置生效。
+
+当前项目只有 GitHub Pages 文档部署，没有生产后端或服务器部署脚本，因此这里只记录完整方法，不新增虚假的服务器 Secret 或部署代码。将来增加后端部署时，必须把“写入环境文件、重启服务、健康检查”作为同一个交付闭环实现。
+
 ### Repository、Environment 和 Organization Secret
 
 | 类型 | 适合场景 | 权限范围 |
