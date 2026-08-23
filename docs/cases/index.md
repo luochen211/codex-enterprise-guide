@@ -31,12 +31,6 @@
 
 ## 已落地案例
 
-- [第二张证明图上传后，第一张为什么不见了？](/cases/evidence-first-debugging)
-- [PR 有冲突，也不代表现在就要处理](/cases/pr-rebase-timing-incident)
-- [错误基线与 worktree 管理导致的系统级回退事故](/cases/worktree-baseline-incident)
-
-第一个案例说明：看到页面异常时，怎样沿数据流补证据，不急着把现象叫作根因。
-
-第二个案例说明：看到 PR 落后或冲突时，怎样区分技术问题、处理时机和维护者权限。
-
-第三个案例说明：多个 worktree 已经混乱时，为什么第一步必须保护现场，而不是清理目录。
+- [第二张证明图上传后，第一张为什么不见了？](/cases/evidence-first-debugging)：沿着数据流补证据，避免把页面现象直接叫作根因。
+- [PR 有冲突，也不代表现在就要处理](/cases/pr-rebase-timing-incident)：分清技术状态、处理时机和维护者权限。
+- [错误基线与 worktree 管理导致的系统级回退事故](/cases/worktree-baseline-incident)：现场已经混乱时，先保护脏改动，再谈恢复和清理。
