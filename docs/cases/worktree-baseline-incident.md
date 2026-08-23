@@ -1,8 +1,6 @@
 # 案例：一次 worktree 认错主线，最后把系统打瘫的事故
 
-这不是“目录名字起得不规范”这么简单。
-
-当时同时开了很多 worktree，有些目录名字里都写着 main。后来恢复代码时，目录名、实际分支和远端主线没有对上，又没有先保护各个目录里没提交的改动。结果一层层叠上去，最后影响了线上业务。
+一个目录名字里写着 `main`，我们就把它当成主线。这个看似很小的判断，后来把旧代码、功能分支和未提交改动混在一起，最终影响了线上业务。
 
 ## 事故结果
 
@@ -16,19 +14,25 @@
 
 现场有一个目录叫：
 
+```text
 /private/tmp/imaging-issue-21-main
+```
 
 但它实际检出的分支是旧的本地 main，提交是 92743ab，比 GitHub 上现在的 origin/main 少了 81 个提交。
 
 还有一个目录叫：
 
+```text
 /private/tmp/imaging-issue-19-main
+```
 
 它实际也不是 main，而是 feat/issue-19-ops-config-main。
 
 真正的功能工作区则是：
 
+```text
 /Volumes/Luochen/Business-work/Imaging-OnlineRetouchingOrder
+```
 
 它实际检出的是 feat/issue-19-ops-config。这是功能分支，不是主线。它虽然有自己的功能提交，但不能代替最新的 main。
 
@@ -71,7 +75,7 @@ Behind 可以理解成“这个分支落后主线多少提交”；Ahead 可以�
 
 具体可看 [GitHub 官方分支保护说明](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches) 和 [GitHub 定价](https://github.com/pricing)。
 
-## 真正的四个错误
+## 事故不是一个错误造成的
 
 ### 1. 把目录名字当成了分支
 
@@ -135,7 +139,7 @@ Behind 可以理解成“这个分支落后主线多少提交”；Ahead 可以�
 
 ## 复盘结论
 
-这次事故不是因为 Git 太复杂，而是因为几个本来应该分开的东西被混成了一件事：
+这次事故不是某条 Git 命令敲错了，而是几个本来应该分开的身份被混成了一件事：
 
 - GitHub 的 main，是远端主线。
 - 功能分支，是某一项工作的路线。
