@@ -25,6 +25,41 @@
 | `/Volumes/Luochen/Business-work/Imaging-OnlineRetouchingOrder` | `feat/issue-19-ops-config` | 功能分支，包含功能提交，但不是主线 |
 | `/private/tmp/imaging-issue-19-main` | `feat/issue-19-ops-config-main` | 功能分支，不是 `main` |
 
+## 从 GitHub 分支页面读这张截图
+
+下面这张图是 GitHub 的远端分支页面。它能说明远端有哪些 branch、分支相对 `main` 的提交差异，以及哪些分支关联了 PR；它不能说明本地哪个目录是 worktree，也不能说明本地 worktree 有没有未提交改动。
+
+![GitHub 分支列表截图](/github-branches-20260823.png)
+
+这张截图里实际有一个默认分支和五个个人分支。`Your branches` 与 `Active branches` 是同一批分支的两种展示，不是两套不同的分支。
+
+| 截图中的分支 | 这代表什么 | 截图里的 `Behind / Ahead` |
+| --- | --- | --- |
+| `main` | 远端默认主线，其他分支通常以它作为比较基线 | 默认分支 |
+| `feat/issue-19-ops-config` | Issue 19 的功能分支 | `Behind 61 / Ahead 22`，已经和 `main` 分叉，不能当成主线 |
+| `fix/refresh-dispatch-test` | 刷新派发测试的修复分支 | `Behind 3 / Ahead 0`，当前没有相对 `main` 的独有提交 |
+| `fix/optional-retoucher-leader` | 允许没有 leader 的修复分支 | `Behind 4 / Ahead 0`，当前没有相对 `main` 的独有提交 |
+| `fix/order-500-datetime-serialization` | 修复订单 500 时间序列化 | `Behind 7 / Ahead 1`，有 1 个分支独有提交 |
+| `fix/remove-order-delay` | 删除订单延期流程的修复分支 | `Behind 33 / Ahead 0`，关联 PR #57，但分支当前没有相对 `main` 的独有提交 |
+
+`Behind` 和 `Ahead` 要这样读：
+
+- `Behind 61`：这个分支缺少 `main` 上的 61 个提交。
+- `Ahead 22`：这个分支有 22 个 `main` 没有的提交。
+- 两个数字同时大于 0：说明两条分支已经分叉，不是“功能分支自动包含最新主线”。
+- `Ahead 0`：不代表分支一定没有历史，也不代表 PR 一定已经合并；只能说明当前相对 `main` 没有独有提交，是否关闭或删除要另查 PR、提交和 worktree。
+
+截图里的绿色 `3 / 3` 只表示检查通过，不表示分支已经合并；`Pull request` 列只表示 GitHub 找到了关联 PR，空白也不等于没有代码改动。右侧的垃圾桶是删除远端分支的入口，在 dirty state、PR 状态和 worktree 映射没有核对之前不能点击。
+
+这也是这次事故必须区分的两张表：
+
+```text
+GitHub 分支页面：远端 branch / behind / ahead / PR / CI
+本地 worktree：目录路径 / 当前 branch / HEAD / git status / 未跟踪文件
+```
+
+只有把两张表按 branch 连接起来，才能知道一个 GitHub 分支对应哪个本地目录，以及这个目录里的改动是否已经安全交接。
+
 正确的恢复关系应该是：
 
 ```text
