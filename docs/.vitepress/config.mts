@@ -27,6 +27,12 @@ export default defineConfig({
         ],
       },
       {
+        text: "GitHub 协作",
+        items: [
+          { text: "仓库、分支、PR 与 worktree", link: "/guide/github-workflow" },
+        ],
+      },
+      {
         text: "工程化落地",
         items: [
           { text: "服务器部署", link: "/delivery/server" },

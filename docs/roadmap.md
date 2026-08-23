@@ -10,14 +10,14 @@
 | --- | --- | --- |
 | 00 基础认知 | 先判断项目是什么，别一上来就写代码 | [产品形态](/guide/product-forms)、[技术栈](/guide/tech-stack)、[对 AI 友好的代码](/guide/ai-friendly-code) |
 | 01 入门闭环 | 完成第一个低风险任务，并知道怎么验收 | [项目总览](/guide/overview) |
-| 02 工程实践 | 进入真实仓库，完成可提交的改动 | [对 AI 友好的代码](/guide/ai-friendly-code) |
+| 02 工程实践 | 进入真实仓库，完成可提交的改动 | [GitHub 协作基础](/guide/github-workflow)、[对 AI 友好的代码](/guide/ai-friendly-code) |
 | 03 工作流扩展 | 让 Codex 参与验证、文档、发布和排障 | [服务器部署](/delivery/server)、[CI/CD 流水线](/delivery/cicd) |
 | 04 团队沉淀 | 把个人经验变成团队规范和案例库 | [案例库](/cases/)、[共建指南](/contribute) |
 
 推荐顺序：
 
 ```text
-产品形态 -> 技术栈 -> AI 友好代码 -> 第一个任务闭环 -> 真实项目交付 -> 部署与 CI/CD -> 团队规范
+产品形态 -> 技术栈 -> GitHub 协作基础 -> AI 友好代码 -> 第一个任务闭环 -> 真实项目交付 -> 部署与 CI/CD -> 团队规范
 ```
 
 每个阶段都要留下一个产出物。只看懂不算完成，能复用、能验证、能交给别人接着做，才算进入下一阶段。
