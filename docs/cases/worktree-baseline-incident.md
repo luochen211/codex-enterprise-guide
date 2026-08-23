@@ -59,6 +59,18 @@ Behind 可以理解成“这个分支落后主线多少提交”；Ahead 可以�
 
 截图里的绿色 3 / 3 只说明检查通过，不说明已经合并。右边的 PR 标记说明 GitHub 找到了关联 PR，也不等于本地 worktree 已经安全。右侧垃圾桶是删除远端分支的入口，在现场没有核对清楚之前不能点。
 
+## 还有一个前提：私有仓库的保护不是默认免费的
+
+如果仓库是公开的，GitHub Free 就可以给 main 设置分支保护。
+
+如果仓库是个人私有仓库，GitHub Free 不能使用这类完整保护。也就是说，你不能靠免费账户强制要求“必须走 PR、必须审核、必须通过检查后才能合并”。个人私有仓库需要开通 GitHub Pro，目前是每月 4 美元。
+
+如果仓库属于组织，私有仓库通常要看组织是否开通 Team 或 Enterprise。只升级个人账号的 Pro，不一定能替组织仓库打开保护。
+
+所以这次事故的防线有两层：本地要把 worktree 和真实分支对应清楚，GitHub 上还要有能力保护 main。没有付费计划时，只能靠人为约定，GitHub 不会替你拦住直接改 main 的操作。
+
+具体可看 [GitHub 官方分支保护说明](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches) 和 [GitHub 定价](https://github.com/pricing)。
+
 ## 真正的四个错误
 
 ### 1. 把目录名字当成了分支
