@@ -8,7 +8,7 @@
 
 - `docs/`：文档内容源
 - `docs/.vitepress/config.mts`：站点配置、导航和侧边栏
-- `docs/.vitepress/theme/custom.css`：主题样式
+- `docs/.vitepress/theme/`：主题扩展和首页 GitHub Star 提示
 - `.github/workflows/deploy.yml`：GitHub Pages 自动部署流水线
 
 本地启动：

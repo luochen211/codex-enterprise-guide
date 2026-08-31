@@ -13,7 +13,7 @@ export default defineConfig({
       { text: "指南", link: "/guide/overview" },
       { text: "部署", link: "/delivery/server" },
       { text: "案例", link: "/cases/" },
-      { text: "GitHub", link: "https://github.com/cuidong233/codex-enterprise-guide" },
+      { text: "GitHub", link: "https://github.com/luochen211/codex-enterprise-guide" },
     ],
     sidebar: [
       {
@@ -49,7 +49,7 @@ export default defineConfig({
       },
     ],
     socialLinks: [
-      { icon: "github", link: "https://github.com/cuidong233/codex-enterprise-guide" },
+      { icon: "github", link: "https://github.com/luochen211/codex-enterprise-guide" },
     ],
     search: {
       provider: "local",
