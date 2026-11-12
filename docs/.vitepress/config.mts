@@ -1,8 +1,8 @@
 import { defineConfig } from "vitepress";
 
 export default defineConfig({
-  title: "Codex Enterprise Guide",
-  description: "Codex 从 0 到企业级项目",
+  title: "从 Demo 到商用",
+  description: "用 AI 编程，把 Demo 做成能收钱、能长期运行的项目",
   base: "/codex-enterprise-guide/",
   cleanUrls: true,
   lang: "zh-CN",
@@ -55,7 +55,7 @@ export default defineConfig({
       provider: "local",
     },
     footer: {
-      message: "Built as a practical Codex enterprise guide.",
+      message: "从 Demo 到商用：用 AI 编程，把 Demo 做成能收钱、能长期运行的项目。",
       copyright: "Released under the MIT License.",
     },
   },
