@@ -2,7 +2,7 @@
   "name": "codex-enterprise-guide",
   "version": "0.1.0",
   "private": false,
-  "description": "一份面向个人、创作者、开发者与团队的 Codex 企业级实践指南。",
+  "description": "从 Demo 到商用：用 AI 编程，把 Demo 做成能收钱、能长期运行的项目。",
   "scripts": {
     "dev": "vitepress dev docs --host 0.0.0.0 --port 4173",
     "start": "npm run dev",
@@ -10,9 +10,9 @@
     "build": "vitepress build docs"
   },
   "keywords": [
-    "codex",
-    "openai",
+    "ai-coding",
     "guide",
+    "delivery",
     "ci-cd",
     "developer-workflow"
   ],

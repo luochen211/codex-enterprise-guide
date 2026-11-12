@@ -1,6 +1,6 @@
-# Codex 从 0 到企业级项目
+# 从 Demo 到商用
 
-一份面向个人、创作者、开发者与团队的 Codex 实践指南。目标不是整理命令，而是把 Codex 用法沉淀成可学习、可复制、可团队化的工作流。
+一份写给有一定编程基础、但基础不扎实的人的实践指南：用 AI 编程，把 Demo 做成能收钱、能长期运行的项目。目标不是整理命令，而是把 AI 编程的用法沉淀成可学习、可复制、可团队化的工作流。
 
 ## 当前版本
 
@@ -97,8 +97,8 @@ push main -> npm ci -> npm run check -> npm run build -> upload artifact -> depl
 
 ## 下一步
 
-1. 补第一篇教程：`第一次让 Codex 理解一个项目`
-2. 补一个案例：`用 Codex 为当前项目生成 README 和首页`
+1. 补第一篇教程：`第一次让 AI 理解一个项目`
+2. 补一个案例：`用 AI 为当前项目生成 README 和首页`
 3. 补一篇服务器部署教程：`把文档站发布到云服务器`
 4. 补一篇 CI/CD 教程：`用 GitHub Actions 自动构建和发布`
 5. 增加目录页：`roadmap.html`、`cases.html`、`playbook.html`
