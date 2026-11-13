@@ -4,7 +4,7 @@ layout: home
 hero:
   name: 从 Demo 到商用
   text: 用 AI 编程，把 Demo 做成能收钱、能长期运行的项目
-  tagline: 写给有一定编程基础、但基础不扎实的人。不用先学数据结构和数据库设计，要学的是：交给 AI 做什么，自己判断和验收什么。
+  tagline: 写给大学生，尤其是还没接触过真实项目的人。不用先学数据结构和数据库设计，要学的是：交给 AI 做什么，自己判断和验收什么。
   image:
     src: /logo.svg
     alt: 从 Demo 到商用
