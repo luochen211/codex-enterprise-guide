@@ -12,12 +12,26 @@ export default defineConfig({
     nav: [
       { text: "目录", link: "/book/" },
       { text: "从序开始", link: "/book/preface" },
+      { text: "GitHub 小课", link: "/github/" },
       { text: "参考资料", link: "/guide/overview" },
       { text: "案例", link: "/cases/" },
       { text: "GitHub", link: "https://github.com/luochen211/codex-enterprise-guide" },
     ],
     sidebar: [
       ...bookSidebar,
+      {
+        text: "GitHub 入门小课",
+        collapsed: false,
+        items: [
+          { text: "课程列表", link: "/github/" },
+          { text: "1 · 仓库和提交", link: "/github/repo-and-commit" },
+          { text: "2 · 分支和 PR", link: "/github/branch-and-pr" },
+          { text: "3 · Issue", link: "/github/issue" },
+          { text: "4 · Actions", link: "/github/actions" },
+          { text: "5 · 什么不能进仓库", link: "/github/secrets" },
+          { text: "6 · 让 AI 操作 GitHub", link: "/github/ai" },
+        ],
+      },
       {
         text: "参考资料",
         collapsed: true,
