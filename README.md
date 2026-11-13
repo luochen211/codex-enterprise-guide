@@ -32,7 +32,7 @@ npm run build
 
 ## 全书结构
 
-在线阅读：<https://luochen211.github.io/codex-enterprise-guide/>
+在线阅读：<https://luochen211.github.io/demo-to-production/>
 
 14 章，分五部分。每章只讲两件事：这一步交给 AI 做什么，你自己要判断、验收什么。全书用一个餐厅运营后台做示例项目。
 
