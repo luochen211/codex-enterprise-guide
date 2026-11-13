@@ -15,6 +15,9 @@ hero:
     - theme: alt
       text: 查看目录
       link: /book/
+    - theme: alt
+      text: GitHub 入门小课
+      link: /github/
 
 features:
   - title: 第一部分　想清楚做什么
@@ -35,6 +38,9 @@ features:
   - title: 附录
     details: 商用上线前自测清单、去哪找真实项目练手、术语表。
     link: /book/appendix-a
+  - title: 小课　GitHub 入门
+    details: 六节课：仓库和提交、分支和 PR、Issue、Actions、密钥，以及怎么验收 AI 交来的 PR。
+    link: /github/
 ---
 
 ## 你停在哪一层
