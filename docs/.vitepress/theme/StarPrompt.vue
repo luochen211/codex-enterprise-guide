@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-const repositoryUrl = "https://github.com/luochen211/codex-enterprise-guide";
+const repositoryUrl = "https://github.com/luochen211/demo-to-production";
 const visible = ref(true);
 
 function openRepository() {

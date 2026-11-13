@@ -4,7 +4,7 @@ import { bookSidebar } from "./sidebar.mts";
 export default defineConfig({
   title: "从 Demo 到商用",
   description: "用 AI 编程，把 Demo 做成能收钱、能长期运行的项目",
-  base: "/codex-enterprise-guide/",
+  base: "/demo-to-production/",
   cleanUrls: true,
   lang: "zh-CN",
   themeConfig: {
@@ -15,7 +15,7 @@ export default defineConfig({
       { text: "GitHub 小课", link: "/github/" },
       { text: "参考资料", link: "/guide/overview" },
       { text: "案例", link: "/cases/" },
-      { text: "GitHub", link: "https://github.com/luochen211/codex-enterprise-guide" },
+      { text: "GitHub", link: "https://github.com/luochen211/demo-to-production" },
     ],
     sidebar: [
       ...bookSidebar,
@@ -57,7 +57,7 @@ export default defineConfig({
       },
     ],
     socialLinks: [
-      { icon: "github", link: "https://github.com/luochen211/codex-enterprise-guide" },
+      { icon: "github", link: "https://github.com/luochen211/demo-to-production" },
     ],
     search: {
       provider: "local",

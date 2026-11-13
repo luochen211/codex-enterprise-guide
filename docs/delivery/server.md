@@ -44,7 +44,7 @@ Vercel 则更偏前端/静态托管和 Serverless 平台。它非常适合部署
 线上访问地址：
 
 ```text
-https://luochen211.github.io/codex-enterprise-guide/
+https://luochen211.github.io/demo-to-production/
 ```
 
 ## 云服务器部署时需要理解什么
@@ -79,7 +79,7 @@ Nginx 可以负责静态文件服务、反向代理、HTTPS 配置和访问日�
 server {
   listen 80;
   server_name example.com;
-  root /var/www/codex-enterprise-guide;
+  root /var/www/demo-to-production;
   index index.html;
 
   location / {
