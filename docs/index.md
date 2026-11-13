@@ -39,7 +39,7 @@ features:
     details: 商用上线前自测清单、去哪找真实项目练手、术语表。
     link: /book/appendix-a
   - title: 小课　GitHub 入门
-    details: 六节课：仓库和提交、分支和 PR、Issue、Actions、密钥，以及怎么验收 AI 交来的 PR。
+    details: 七节课：先认识 Issue、PR、GHSA 三个核心单位，再学提交、分支、Actions、密钥，以及怎么验收 AI 交来的 PR。
     link: /github/
 ---
 
