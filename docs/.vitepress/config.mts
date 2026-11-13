@@ -6,6 +6,14 @@ export default defineConfig({
   description: "用 AI 编程，把 Demo 做成能收钱、能长期运行的项目",
   base: "/demo-to-production/",
   cleanUrls: true,
+  head: [
+    ["meta", { property: "og:type", content: "website" }],
+    ["meta", { property: "og:title", content: "从 Demo 到商用" }],
+    ["meta", { property: "og:description", content: "用 AI 编程，把 Demo 做成能收钱、能长期运行的项目" }],
+    ["meta", { property: "og:image", content: "https://luochen211.github.io/demo-to-production/og.png" }],
+    ["meta", { name: "twitter:card", content: "summary_large_image" }],
+    ["meta", { name: "twitter:image", content: "https://luochen211.github.io/demo-to-production/og.png" }],
+  ],
   lang: "zh-CN",
   themeConfig: {
     logo: "/logo.svg",
@@ -24,6 +32,7 @@ export default defineConfig({
         collapsed: false,
         items: [
           { text: "课程列表", link: "/github/" },
+          { text: "0 · 三个核心单位", link: "/github/core-units" },
           { text: "1 · 仓库和提交", link: "/github/repo-and-commit" },
           { text: "2 · 分支和 PR", link: "/github/branch-and-pr" },
           { text: "3 · Issue", link: "/github/issue" },

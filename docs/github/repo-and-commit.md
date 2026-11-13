@@ -90,4 +90,4 @@ git push              # 把存档推到 GitHub
 
 ---
 
-[课程列表](/github/)　·　下一课：[第 2 课　分支和 PR](/github/branch-and-pr)
+[课程列表](/github/)　·　上一课：[第 0 课　三个核心单位](/github/core-units)　·　下一课：[第 2 课　分支和 PR](/github/branch-and-pr)
